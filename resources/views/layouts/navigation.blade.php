@@ -3,7 +3,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('posts.index') }}" class="flex items-center space-x-2">
+                    <a href="{{ url('/') }}" class="flex items-center space-x-2">
 
                         <svg class="block h-9 w-auto" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                              viewBox="0 0 437.5 437.5" xml:space="preserve">
