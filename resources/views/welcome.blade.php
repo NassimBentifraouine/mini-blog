@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-t">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bienvenue sur {{ config('app.name', 'Blogger') }}</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -9,26 +9,52 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="antialiased">
+
 <div class="relative min-h-screen bg-white text-gray-800">
 
     <header class="absolute top-0 left-0 right-0 z-10 bg-primary-600">
-        <div class="max-w-7xl mx-auto flex justify-between items-center p-4 sm:p-6">
-            <a href="/" class="flex items-center space-x-2">
-                <x-application-logo-white class="w-10 h-10" />
-                <span class="font-bold text-xl text-white">{{ config('app.name', 'Blogger') }}</span>
-            </a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
 
-            <nav class="space-x-4">
-                <a href="{{ route('posts.index') }}" class="text-sm font-medium text-gray-100 hover:text-white">Blog</a>
-                @auth
-                <a href="{{ route('dashboard') }}" class="text-sm font-medium text-gray-100 hover:text-white">Dashboard</a>
-                @else
-                <a href="{{ route('login') }}" class="text-sm font-medium text-gray-100 hover:text-white">Se connecter</a>
-                <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-primary-700 bg-white hover:bg-gray-100">
-                    S'inscrire
-                </a>
-                @endauth
-            </nav>
+                <div class="flex">
+                    <div class="shrink-0 flex items-center">
+                        <a href="/" class="flex items-center space-x-2">
+                            <x-application-logo-white class="block h-9 w-auto" />
+                            <span class="font-bold text-lg text-white">{{ config('app.name', 'Blogger') }}</span>
+                        </a>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <a href="{{ route('posts.index') }}"
+                           class="inline-flex items-center px-1 pt-1 border-b-2
+                                          {{ request()->routeIs('posts.*')
+                                             ? 'border-white text-white'
+                                             : 'border-transparent text-gray-200 hover:text-white hover:border-gray-100' }}
+                                          text-sm font-medium focus:outline-none transition duration-150 ease-in-out">
+                            Blog
+                        </a>
+                    </div>
+                </div>
+
+                <nav class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
+                    @auth
+                    <a href="{{ route('posts.index') }}" class="text-sm font-medium text-gray-100 hover:text-white">Mon Blog</a>
+                    @else
+                    <a href="{{ route('login') }}" class="text-sm font-medium text-gray-100 hover:text-white">Se connecter</a>
+                    <a href="{{ route('register') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-primary-700 bg-white hover:bg-gray-100">
+                        S'inscrire
+                    </a>
+                    @endauth
+                </nav>
+
+                <div class="-me-2 flex items-center sm:hidden">
+                    @auth
+                    <a href="{{ route('posts.index') }}" class="text-sm font-medium text-gray-100 hover:text-white">Mon Blog</a>
+                    @else
+                    <a href="{{ route('login') }}" class="text-sm font-medium text-gray-100 hover:text-white">Login</a>
+                    @endauth
+                </div>
+            </div>
         </div>
     </header>
 
@@ -61,6 +87,7 @@
             </div>
         </div>
     </main>
+
 </div>
 </body>
 </html>
